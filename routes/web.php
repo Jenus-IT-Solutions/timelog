@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('time-log.form');
+    return view('timelog.form');
 });
 
 Route::get('real-time', function() {
@@ -28,3 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('employees', 'Employees\EmployeesController');
 Route::post('employees/check', 'Employees\EmployeesController@check')->name('employees.check');
+
+Route::post('timelog/login', 'TimeLog\TimelogController@login')->name('timelog.login');
+Route::post('timelog/logoff', 'TimeLog\TimeLogController@logoff')->name('timelog.logoff');
+

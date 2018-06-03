@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="flex-center position-ref full-height">
-        <div class="content">            
+        <div class="content">   
+            @include('layouts.error-and-messages')         
             <div id="clock" class="dark">
                 <h2 style="margin: 0;">{{ \Carbon\Carbon::now()->format('M d, Y') }}</h2>
                 <div class="display" style="height: auto;">
@@ -13,18 +14,60 @@
                 </div>
             </div>
 
-            <form action="{{ route('employees.check') }}" class="p-4">
+         @if(session()->has('employee'))
+            <?php $emp = session()->get('employee'); ?>
+            <div class="p-3 mt-3 bg-light text-dark">
+                <p>Name: {{ $emp->meta('first_name') }} {{ $emp->meta('last_name') }}</p> 
+                <p>Status: @if($emp->meta('login_status') == 1)<b class="text-success">Logged in</b>. @else <b class="text-danger">Logged off</b>. @endif </p>
+                <p> 
+                    @if($emp->meta('login_status') == 0)
+                        Logged out {{ \Carbon\Carbon::parse($emp->last_timelog()->logoff)->timezone(session('timezone'))->diffForHumans() }}
+                    @else
+                        Logged in {{ \Carbon\Carbon::parse($emp->last_timelog()->login)->timezone(session('timezone'))->diffForHumans() }}
+                    @endif
+                </p>
+            </div>
+            
+            @if($emp->meta('login_status') == 0)
+            <form action="{{ route('timelog.login') }}" method="POST" class="p-4">
+            @else
+            <form action="{{ route('timelog.logoff') }}" method="POST" class="p-4">
+            @endif
+                @csrf
+                <input type="hidden" name="tz" id="tz">
                 <div class="form-group">
-                    <input type="text" class="form-control text-center mb-4" required placeholder="Enter Employee ID">
+                    <input type="hidden" name="employee_id" value="{{ $emp->employee_id }}">
+                    @if($emp->meta('login_status') == 0)
+                        <button class="btn btn-success btn-block mb-4">Log in</button>
+                    @else
+                        <button class="btn btn-danger btn-block mb-4">Log off</button>
+                    @endif
+                </div>
+            </form>
+        @else
+            <form action="{{ route('employees.check') }}" method="POST" class="p-4">
+                @csrf
+                <input type="hidden" name="tz" id="tz">
+                <div class="form-group">
+                    <input type="text" class="form-control text-center mb-4" name="employee_id" required placeholder="Enter Employee ID">
                     <button class="btn btn-success btn-block mb-4">Check</button>
                 </div>
             </form>
+        @endif
+
 
             {{-- <div class="button-holder">
                 <a class="button">Switch Theme</a>
             </div> --}}
         </div>
     </div>
+    <script>
+        $(function () {
+            // guess user timezone 
+            $('#tz').val(moment.tz.guess())
+        });    
+    </script>
+
     <style>
         /*-------------------------
             Simple reset

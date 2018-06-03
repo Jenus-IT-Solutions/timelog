@@ -30349,7 +30349,7 @@ $(function () {
         // d is for day of week and A is for AM/PM
 
         var now = moment().format("hhmmssdA");
-        clock.find('input["name=date_time"').val(now);
+        clock.find('input[name=date_time]').val(now);
 
         digits.h1.attr('class', digit_to_name[now[0]]);
         digits.h2.attr('class', digit_to_name[now[1]]);

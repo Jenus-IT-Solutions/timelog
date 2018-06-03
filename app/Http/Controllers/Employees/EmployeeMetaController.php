@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Employees;
 
+use App\EmployeeMeta;
 use App\Employees;
 use Illuminate\Http\Request;
-use Illuminate\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
-class EmployeesController extends Controller
+class EmployeeMetaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +43,10 @@ class EmployeesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employees  $employees
+     * @param  \App\EmployeeMeta  $employeeMeta
      * @return \Illuminate\Http\Response
      */
-    public function show(Employees $employees)
+    public function show(EmployeeMeta $employeeMeta)
     {
         //
     }
@@ -53,10 +54,10 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employees  $employees
+     * @param  \App\EmployeeMeta  $employeeMeta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employees $employees)
+    public function edit(EmployeeMeta $employeeMeta)
     {
         //
     }
@@ -65,10 +66,10 @@ class EmployeesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employees  $employees
+     * @param  \App\EmployeeMeta  $employeeMeta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employees $employees)
+    public function update(Request $request, EmployeeMeta $employeeMeta)
     {
         //
     }
@@ -76,10 +77,10 @@ class EmployeesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employees  $employees
+     * @param  \App\EmployeeMeta  $employeeMeta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employees $employees)
+    public function destroy(EmployeeMeta $employeeMeta)
     {
         //
     }
