@@ -99,9 +99,11 @@ class EmployeesController extends Controller
      * @param  \App\Employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function show(Employees $employees)
+    public function show(Employees $employee)
     {
         //
+
+        return view('employees.show', compact('employee'));
     }
 
     /**

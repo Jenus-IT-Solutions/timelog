@@ -21,7 +21,11 @@
                 <p>Status: @if($emp->meta('login_status') == 1)<b class="text-success">Logged in</b>. @else <b class="text-danger">Logged off</b>. @endif </p>
                 <p> 
                     @if($emp->meta('login_status') == 0)
-                        Logged out {{ \Carbon\Carbon::parse($emp->last_timelog()->logoff)->timezone(session('timezone'))->diffForHumans() }}
+                        @if($emp->last_timelog())
+                            Logged out {{ \Carbon\Carbon::parse($emp->last_timelog()->logoff)->timezone(session('timezone'))->diffForHumans() }}
+                        @else
+                            Currently logged out.
+                        @endif
                     @else
                         Logged in {{ \Carbon\Carbon::parse($emp->last_timelog()->login)->timezone(session('timezone'))->diffForHumans() }}
                     @endif
