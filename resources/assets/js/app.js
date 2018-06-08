@@ -8,7 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.moment = require('moment');
+window.moment = require('moment-timezone');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

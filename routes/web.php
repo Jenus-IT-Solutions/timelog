@@ -32,3 +32,6 @@ Route::post('employees/check', 'Employees\EmployeesController@check')->name('emp
 Route::post('timelog/login', 'TimeLog\TimelogController@login')->name('timelog.login');
 Route::post('timelog/logoff', 'TimeLog\TimeLogController@logoff')->name('timelog.logoff');
 
+Route::get('/calculator', function() {
+    return view('calculator.calculator');
+});
