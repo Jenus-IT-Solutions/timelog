@@ -41,30 +41,32 @@
         jQuery(document).ready(function() {
             MI = jQuery('#monthly-salary').val();
 
-            jQuery('#monthly-salary').blur(function() {
-                MI = parseFloat(jQuery(this).val());
-                SSS = computeSSS(MI);
-                PhilHealth = computePhilhealth(MI);
-                Pag_IBIG = computePagibig(MI);
-                taxable_income = computeTaxableIncome(MI);
+            jQuery('#monthly-salary').keypress(function(e) {
+                if(e.which == 13) {
+                    MI = parseFloat(jQuery(this).val());
+                    SSS = computeSSS(MI);
+                    PhilHealth = computePhilhealth(MI);
+                    Pag_IBIG = computePagibig(MI);
+                    taxable_income = computeTaxableIncome(MI);
 
-                if(taxable_income >= 250001 && taxable_income <= 400000)
-                    annual_tax = (taxable_income - 250000) * 0.2;
-                else if(taxable_income >= 400001 && taxable_income <= 800000)
-                    annual_tax = ((taxable_income - 400000) * 0.25) + 30000;
-                else if(taxable_income >= 800001 && taxable_income <= 2000000)
-                    annual_tax = ((taxable_income - 800000) * 0.3) + 130000;
-                else if(taxable_income >= 2000001 && taxable_income <= 8000000)
-                    annual_tax = ((taxable_income - 2000000) * 0.32) + 490000;
-                else if(taxable_income > 8000000)
-                    annual_tax = ((taxable_income - 8000000) * 0.35) + 2410000;
-                else
-                    annual_tax = 0;
+                    if(taxable_income >= 250001 && taxable_income <= 400000)
+                        annual_tax = (taxable_income - 250000) * 0.2;
+                    else if(taxable_income >= 400001 && taxable_income <= 800000)
+                        annual_tax = ((taxable_income - 400000) * 0.25) + 30000;
+                    else if(taxable_income >= 800001 && taxable_income <= 2000000)
+                        annual_tax = ((taxable_income - 800000) * 0.3) + 130000;
+                    else if(taxable_income >= 2000001 && taxable_income <= 8000000)
+                        annual_tax = ((taxable_income - 2000000) * 0.32) + 490000;
+                    else if(taxable_income > 8000000)
+                        annual_tax = ((taxable_income - 8000000) * 0.35) + 2410000;
+                    else
+                        annual_tax = 0;
 
-                jQuery('#monthly-income-tax').val(parseFloat(annual_tax / 12, 2).toFixed(2));
-                jQuery('#sss').val(SSS);
-                jQuery('#pagibig').val(Pag_IBIG);
-                jQuery('#philhealth').val(PhilHealth);
+                    jQuery('#monthly-income-tax').val(parseFloat(annual_tax / 12, 2).toFixed(2));
+                    jQuery('#sss').val(SSS);
+                    jQuery('#pagibig').val(Pag_IBIG);
+                    jQuery('#philhealth').val(PhilHealth);
+                }
             });
         });
 
